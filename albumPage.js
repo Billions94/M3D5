@@ -4,10 +4,9 @@
 
     const albumCover = document.getElementById("coverImg")
     const albumName = document.getElementById("albumName")
-    /* albumName.innerText=""
-    albumCover.innerHTML="" */
+   
 
-    const tracksTable = document.getElementsByName("tbody")
+    const tracksTable = document.getElementById("tracks")
     
 
     /* const params = new URLSearchParams(window.location.search).get('albumId')
@@ -39,7 +38,7 @@
 
         console.log(tracksList)
 
-        console.log(tracksTable)
+        tracksTable.appendChild(tracksList)
         
         
         } 
@@ -54,12 +53,12 @@ window.onload = function () {
 
     showAlbum() 
    
-   {/* <tr>
+   /* <tr>
    <th scope="row">1</th>
    <td colspan="2">20th Century Fox Firm Fare</td>
    <td>0:25</td>
  </tr>
-     */}
+     */
 
 }   
  
