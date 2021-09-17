@@ -24,7 +24,7 @@ const goodMorning = () => {
         <div class="good-morning-card ml-3 mt-4 mb-3 active ">
         <div  class="row no-gutters">
             <div class="col-3">
-                <a href="./album.html?albumId=${object.album.id}">
+                <a href="./albumpage.html?albumId=${object.album.id}">
                 <img src="${object.album.cover_medium}"
                     style="border-radius: 4px" width="80" /></a>
             </div>
@@ -74,7 +74,7 @@ const recentlyPlayed = () => {
                     class="card-img-top" />
                 <div class="card-body mt-2">
                     <h6 class="card-title text-white">${object.title}</h6>
-                    <a href="./album.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
+                    <a href="./albumpage.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
                     <h5></h5>
                     <button id='btn-with-style1' type="button" class="btn btn-success">▶️</button>
                 </div>
@@ -110,7 +110,7 @@ const showsToTry = () => {
                     class="card-img-top" />
                 <div class="card-body mt-2">
                     <h6 class="card-title text-white">${object.title}</h6>
-                    <a href="./album.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
+                    <a href="./albumpage.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
                     <button id='btn-with-style1' type="button" class="btn btn-success">▶️</button>
                 </div>
                 </div>
@@ -143,7 +143,7 @@ const recentlyDownloaded = () => {
                     class="card-img-top" />
                 <div class="card-body mt-2">
                     <h6 class="card-title text-white">${object.title}</h6>
-                    <a href="./album.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
+                    <a href="./albumpage.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
                     <button id='btn-with-style1' type="button" class="btn btn-success">▶️</button>
                 </div>
                 </div>
@@ -177,7 +177,7 @@ const favouriteMusice = () => {
                     class="card-img-top" />
                 <div class="card-body mt-2">
                     <h6 class="card-title text-white">${object.title}</h6>
-                    <a href="./album.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
+                    <a href="./albumpage.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
                     <button id='btn-with-style1' type="button" class="btn btn-success">▶️</button>
                 </div>
                 </div>
