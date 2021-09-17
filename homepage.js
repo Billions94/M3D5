@@ -234,8 +234,8 @@ function queryArtist(){
         row.appendChild(col);
       }
 
-      let recentlyPlayed = document.getElementById('goodmorning')
-      recentlyPlayed.innerHTML = ''
+      let goodmorning = document.getElementById('goodmorning')
+      goodmorning.innerHTML = ''
 
       for (let i = 0; i < 5; i++) {
         let object = body.data[i];
@@ -263,8 +263,10 @@ function queryArtist(){
       </div>
                 
                 `;
-             recentlyPlayed.appendChild(col);
+             goodmorning.appendChild(col);
       }
+
+      
       // At the end of this loop with should have x length of cards with different album covers and different title
     })
     .catch((err) => {
@@ -291,8 +293,8 @@ function queryArtist(){
   
   
 
-   const albumID = new URLSearchParams(window.location.search).get("id")
-   console.log(albumID);
+  //  const albumID = new URLSearchParams(window.location.search).get("id")
+  //  console.log(albumID);
   
   
   window.onload = () => {
@@ -302,6 +304,8 @@ function queryArtist(){
     recentlyDownloaded()
     favouriteMusice()
     searchDeezers()
+    const albumID = new URLSearchParams(window.location.search).get("id")
+   console.log(albumID);
  
 
     
