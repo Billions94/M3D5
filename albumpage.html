@@ -1,0 +1,1243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <link rel="icon" type="image/png" href="./images/icons8-spotify-50 (1).png" sizes="32x32" />
+    <title>Album Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="albumpage.css">
+    <script src="albumPage.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .songs {
+            background-color: rgb(0, 0, 0);
+            color: #8f8f8f;
+            margin-bottom: 10px;
+        }
+
+        .menu {
+            background-color: rgb(0, 0, 0);
+            color: #7a7c74;
+            margin: 0px;
+            height: 88vh;
+            padding-left: 0;
+        }
+
+        .dropdown {
+            position: static;
+            border-radius: 20px;
+            margin-top: 0%;
+            margin-left: 85%;
+        }
+
+        .dropdown-menu {
+            background-color: black;
+        }
+
+        .dropdown-menu a {
+            color: grey;
+        }
+
+        .dropdown-menu a :hover {
+            background-color: rgb(219, 81, 81) !important;
+            color: rgb(228, 80, 80);
+        }
+
+        .dropdown button {
+            color: grey;
+        }
+
+        .dropdown button:hover {
+            color: rgb(192, 185, 185);
+        }
+
+        .album-musics {
+            background: linear-gradient(0deg,
+                    rgba(9, 10, 10, 1) 60%,
+                    rgb(80, 83, 83) 95%);
+            position: relative;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .now-playing {
+            background-color: #181818;
+            color: #ffefff;
+            height: 12vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        .navbar div h4 {
+            font-size: x-small;
+        }
+
+        .navbar div h5 {
+            font-size: xx-small;
+        }
+
+        .vol-btn {
+            position: relative;
+            padding: 0px;
+            margin: 0px;
+            top: -20px;
+        }
+
+        #vol-btn-1 {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 13px;
+            right: 178px;
+        }
+
+        #vol-btn-2 {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 13px;
+            right: 210px;
+        }
+
+        #vol-btn-3 {
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 13px;
+            right: 150px;
+        }
+
+        .duration-hr {
+            border-radius: 4px;
+            background: linear-gradient(90deg,
+                    rgba(223, 230, 232, 1) 62%,
+                    rgb(92, 94, 94) 42%);
+            height: 3px;
+            width: 400px;
+        }
+
+        .volume-hr {
+            border-radius: 4px;
+            background: linear-gradient(90deg,
+                    rgba(223, 230, 232, 1) 75%,
+                    rgb(92, 94, 94) 25%);
+            height: 3px;
+            width: 100px;
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: -2px;
+            right: 43px;
+        }
+
+
+        ul.music-group-list {
+            overflow-y: scroll;
+            max-height: 43vh;
+            list-style-type: none;
+        }
+
+        .music-group-list li a:hover {
+            color: white !important;
+            text-decoration: none;
+            cursor: default;
+         }
+
+        .music-group-list {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .list-group-item {
+            background-color: black;
+            font-style: normal;
+        }
+
+        .list-group-menu {
+            padding-left: 16px;
+            padding-right: 5px;
+        }
+
+        .list-group-menu li:hover{
+            cursor: pointer;
+            color: white
+        }
+
+        .playlist li:hover {
+            cursor: pointer;
+            color: white
+        }
+
+        .list-group-item a {
+            font-style: normal;
+        }
+
+        .divider {
+            border-top: 1px solid #767779;
+            display: block;
+            line-height: 2px;
+            margin: 0px;
+            position: relative;
+            text-align: center;
+            width: 100%;
+        }
+
+        .main {
+            margin: 0px;
+            padding: 0px;
+            height: 88vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            /* box-shadow: inset 0 0 5px grey; */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(58, 57, 57);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(114, 116, 116);
+        }
+
+        #play-controls {
+            /* margin-left: -25px; */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-top: 2px;
+        }
+
+        .volume-controls {
+            position: relative;
+        }
+
+        span {
+            font-weight: 400;
+            font-size: small;
+        }
+
+        .h5-ineed {
+            position: absolute;
+            margin-top: -9px;
+            margin-left: 41px;
+        }
+
+        .main-body {
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .play-btn .span-1 {
+            position: absolute;
+            padding: 0px;
+        
+            top: 9px;
+            left: -38px;
+            color: grey;
+            font-weight: 400;
+            font-size: 11px;
+       }
+
+       .play-btn .span-2 {
+        position: absolute;
+        padding: 0px;
+        /* margin: -5px; */
+        top: 9px;
+        left: 405px;
+        color: grey;
+        font-weight: 400;
+        font-size: 11px;
+      }
+
+        .musics-follow-btn {
+            background-color: transparent;
+            border: 1px solid rgb(155, 154, 154);
+            padding: 1px 10px;
+            border-radius: 2px;
+            color: rgb(199, 198, 198);
+        }
+
+        .musics-dot-btn {
+            background-color: transparent;
+            border: 0px;
+            border-radius: 2px;
+            color: rgb(199, 198, 198);
+            font-size: xx-large;
+        }
+
+        .album-musics-title {
+            color: white;
+            margin: 12px;
+            margin-left: 40px;
+        }
+
+        #repeat-button {
+            margin-left: 10px;
+
+        }
+
+        .table {
+            background-color: transparent !important;
+            /* border-top: 1px solid grey; */
+            padding-left: 15px;
+        }
+
+        .t-h {
+            font-weight: 400;
+        }
+
+        .list-group-item-1 {
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .container-install-app {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-left: 16px;
+            padding-right: 16px;
+            position: relative;
+            margin-top: 24px;
+            padding-left: 8px;
+            padding-right: 8px;
+            height: 200px;
+        }
+
+        #install-app-icon {
+            margin-left: 20px;
+            margin-right: 18px;
+            margin-bottom: 5px;
+        }
+
+        .btn-instal-app {
+            margin-top: 8px;
+            background-color: black;
+            border: 0;
+            color: grey;
+            /* height: 10vh; */
+            margin-right: -8px;
+            padding-bottom: 28px;
+        }
+
+        .instal-app {
+            padding: 0;
+        }
+
+        .instal-app li {
+            padding: 0;
+            margin: -24px;
+        }
+
+        #test {
+            word-wrap: break-word;
+        }
+
+        #expand {
+            position: absolute;
+            margin-left: 363px;
+            margin-top: -10px;
+        }
+
+        .expand {
+            position: relative;
+        }
+
+        #dropdownMenuButton {
+            /* border: 1px solid white !important; */
+            border-radius: 20px;
+            background-color: #02020270;
+        }
+
+        .playlist {
+            padding-left: 16px;
+            padding-right: 16px;
+
+        }
+
+        .playlist h6 {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .playlist a {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .playlist ul {
+            padding: 0;
+        }
+
+        #btn-b4-follow {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: black;
+            padding: 0;
+        }
+
+        .card-body {
+            padding: 0%;
+        }
+
+        h5.card-title {
+            margin-bottom: 0px;
+            margin-top: 5px;
+        }
+
+        .card-img-top {
+            border-radius: 0%;
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+                }
+
+        .card-img-top-1 {
+            border-radius: 10%;
+
+        }
+
+        .card-1 {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(70, 64, 64);
+        }
+
+        .card-img-top-3 {
+            width: 25%;
+            object-fit: cover;
+        }
+
+        .good-morning-section {
+            background: linear-gradient(0deg,
+                    rgba(9, 10, 10, 1) 75%,
+                    rgba(79, 6, 9, 1) 89%);
+            overflow-y: scroll;
+            overflow-x: hidden;
+            max-height: 88vh;
+            background-color: aquamarine;
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-bottom: 5px;
+        }
+
+        .Recently-card h5 {
+            font-size: smaller;
+            font-weight: lighter;
+            color: rgb(146, 144, 144);
+        }
+
+        .Recently-card h6 {
+            font-size: smaller;
+            font-weight: normal;
+        }
+
+        .Recently-card {
+            border-radius: 5px;
+            background-color: rgb(37, 36, 36);
+            cursor: pointer; 
+            position: relative;
+            width: 100%;
+            /* height: 17vw; */
+            object-fit: cover;
+        }
+
+        
+
+        .Recently-card:hover #btn-with-style1{
+            opacity: 1;
+        }
+
+        .show-card {
+            border-radius: 5px;
+            background-color: rgb(37, 36, 36);
+        }
+
+        .good-morning-card {
+            border-radius: 4px;
+            background-color: #3a2828;  
+            cursor: pointer;  
+        }
+
+        .good-morning-card:hover #btn-with-style {
+            cursor: pointer;
+            opacity: 1;
+            transition: 0.4s;
+        }
+
+        .active #btn-with-style {
+         opacity: 1;
+        }
+
+        .good-morning-section h4 {
+            color: white;
+        }
+
+        .good-morning-section {
+            height: 88vh;
+            
+        }
+
+        .Recently-card img {
+            height: auto;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .Shows-card img {
+            padding: 5px;
+            height: 150px;
+        }
+        .log-in {
+            margin-left: 90%;
+        }
+
+        #btn-in-nav-1 {
+            border-radius: 30px;
+            border: none;
+            background-color: rgba(8, 8, 8, 0.63);
+            width: 30px;
+            height: 30px;
+            padding-top: 1px;
+            padding-left: 9px;
+        }
+
+        .active #btn-in-nav-1 {
+            background-color: rgba(8, 8, 8, 0.781);
+           
+        }
+
+
+
+
+        .username-home {
+            margin-left: 780px;
+            width: 164px;
+            color: white;
+        }
+
+        #songs-nav {
+            background: rgba(79, 6, 9, 1) 89%;
+            padding-left: 32px;
+            padding-right: 32px;
+                   
+        }
+
+        .row.no-gutters {
+            position: relative;
+        }
+
+        #btn-with-style {
+            position: absolute;
+            margin-top: -30px;
+            margin-left: 134px;
+            border-radius: 40px;
+            width: 40px;
+            height: 40px;
+            opacity: 0;
+            transition: 0.60s;
+            font-weight: bolder;
+            padding: -15px;
+        }
+
+        #btn-with-style1 {
+            position: absolute;
+            margin-top: -110px;
+            margin-left: 125px;
+            border-radius: 40px;
+            width: 40px;
+            height: 40px;
+            opacity: 0;
+            font-weight: bolder;
+            padding: -15px;
+            transition: 0.3s;
+        }
+
+        #btn-with-style1:hover {
+            width: 42px;
+            height: 42px;
+            margin-top: -110px;
+            margin-left: 125px;
+            -ms-transform: scaleY(1);
+            transform: scaleX(1);
+            
+         }
+
+        #btn-with-style:hover {
+            margin-left: 134;
+            width: 43px;
+            height: 43px;
+            margin-top: -30px;
+            -ms-transform: scaleY(1);
+            transform: scaleX(1);
+         }
+
+        .good-morning-card h6 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+
+        .Recently-card:hover img{
+            padding: 0;
+            transition: 0.3s;
+            
+        }
+
+        .Recently-card:hover {
+            padding: 5;
+            transition: 0.3s;
+            background-color: #333131;
+        }
+
+
+        #play-button:hover {
+            padding: 0px;
+        }
+        
+        #play-button {
+            padding: 2px;
+        }
+
+        .fuild-bottom {
+            margin-bottom: 30px;
+        }
+
+        #liked-home {
+            color: grey;
+            text-decoration: none;
+        }
+
+        #liked-home:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+        .home-menu {
+            font-weight: 500;
+            font-size: 14px;
+            padding-left: 16px;
+            padding-right: 16px;
+            cursor: pointer;
+        }
+
+        .home-menu li:hover{
+            color: white;
+        }
+
+        .home-menu li {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .home-menu h6 {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .btn-border {
+          margin-left: 660px;
+          
+        }
+
+        .playlisth1 {
+          padding-left: 32px;
+          padding-right: 32px;
+        }
+
+        .liked-song {  
+          background: rgb(2,0,36);
+          background: linear-gradient(90deg, rgb(52, 43, 223) 0%, rgba(21,134,241,1) 100%, rgba(0,212,255,1) 100%);
+          border-radius: 5px;
+          color: white;
+          
+        }
+
+      .card-liked {
+          border-radius: 4px;
+          border: none
+        }
+
+      .playlist-liked {
+        padding-left:32px;
+      }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid main-body">
+        <div class="row main">
+
+            <div class="menu col-12 col-sm-4 col-md-3 col-lg-2 p-0 ml-0 sticky-top">
+                <a href="https://www.spotify.com/us/" target="_blank">
+                    <img src="./images/Spotify_Logo_CMYK_Black.png" width="100" class="mt-2 ml-3 mb-3" /></a>
+
+                <div class="home-menu">
+                    <ul class="list-group">
+                        <li class="list-group-item  pt-2 p-0">
+                            <img src="./images/icons8-home-50.png" width="28" class="mr-3" alt="">
+                            <a id="liked-home" href="finalHomePage.html" class="d-inline-block">Home</a>
+                        </li>
+                        <li class="list-group-item  pt-2 p-0">
+                            <img src="./images/icons8-search-50.png" width="28" class="mr-3" alt="">
+                            <h6 class="d-inline-block">Search</h6>
+                        </li>
+                        <li class="list-group-item  pt-2 p-0">
+                            <img src="./images/icons8-music-library-50.png" width="28" class="mr-3" alt="">
+                            <h6 class="d-inline-block">Your Library</h6>
+                    </ul>
+                </div>
+
+                <div class="playlist">
+                    <ul>
+                        <li class="list-group-item pt-3 p-0">
+                            <img src="./images/icons8-add-new-50.png" width="28" class="mr-3" alt="">
+                            <h6 id="liked-home" href="playlist.html" class="d-inline-block">Playlist</h6>
+                        </li>
+                        <li class="list-group-item  pt-2 p-0">
+                            <img src="./images/icons8-favorite-folder-50.png" width="28" class="mr-3" alt="">
+                            <a id="liked-home" href="liked.html" class="d-inline-block">Liked Songs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-11 my-1">
+                        <div class="divider">
+                            <div>
+                                <strong class=""></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <ul class="list-group music-group-list">
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">My Playlist</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">2Pac Mix</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Popcaan Mix</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Opo Mix</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Burna Boy Mix</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">New</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Quiet</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Hip-Hop Mixtape</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Pablo Escobar (Narcos)</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">XXX</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Naiji</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted mb-1">Reggae</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">My Shazam Tracks</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted ">Discover Weekly</a>
+                        </li>
+                        <li class="list-group-item-1 mb-3">
+                            <a class="text-muted">Heavenly places</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="container-install-app">
+                    <ul class="instal-app">
+                        <li class="list-group-item">
+                            <a href="https://www.spotify.com/us/download/other/" target="_blank">
+                                <button class="btn-instal-app m-0" type="button" href="">
+                                    <img id='install-app-icon' src="./images/icons8-scroll-down-50.png" width="20"
+                                        height="20" alt=""> Install App
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+
+                    
+                <div class="col-12 col-md-10 px-0 con1" id="#">
+                    <!-- <div class="col-10 px-0" id="#"> -->
+                             <div class="px-0 container-fluid">
+                               <!-- -----<album>  page start-------->
+                               <section id="album-section">
+                                 <div class="container-fluid" id="pink-container">
+                                   <div class="row">
+                                     
+                                     <div class="ml-2 sticky-top mt-2">
+                                     <button onclick="location.href='homepage.html'" class="btn btn-btn text-white round" type="button">
+                                       <svg
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         data-name="Layer 1"
+                                         viewBox="0 0 100 100"
+                                         x="0px"
+                                         y="0px"
+                                         fill="white"
+                                         transform="rotate(180)"
+                                       >
+                                         <path
+                                           d="M24.42,99.16a2.84,2.84,0,0,0,2,.84,2.74,2.74,0,0,0,2-.84L75.58,52a2.81,2.81,0,0,0,0-4L28.42.83a2.83,2.83,0,1,0-4,4L69.58,50,24.42,95.16A2.82,2.82,0,0,0,24.42,99.16Z"
+                                         />
+                                       </svg>
+                                     </button>
+                                     <button  onclick="location.href='artist.html'"class="btn btn-btn  text-white round" type="button" style="width: 40px">
+                                       <svg
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         data-name="Layer 1"
+                                         viewBox="0 0 100 100"
+                                         x="0px"
+                                         y="0px"
+                                         fill="white"
+                                       >
+                                         <path
+                                           d="M24.42,99.16a2.84,2.84,0,0,0,2,.84,2.74,2.74,0,0,0,2-.84L75.58,52a2.81,2.81,0,0,0,0-4L28.42.83a2.83,2.83,0,1,0-4,4L69.58,50,24.42,95.16A2.82,2.82,0,0,0,24.42,99.16Z"
+                                         />
+                                       </svg>
+                                     </button>
+                                     </div>
+                                     <!-- -----end of arrows---------------- -->
+                   
+                                     <div
+                                       class="dropdown d-flex justify-content-end"
+                                       style="margin-top: 10px"
+                                     >
+                                       <button
+                                         class="btn btn-dark  badge-pill dropdown-toggle"
+                                         type="button"
+                                         id="dropdownMenu2"
+                                         data-toggle="dropdown"
+                                         aria-haspopup="true"
+                                         aria-expanded="false"
+                                       >
+                                         <img
+                                           id="profilePic"
+                                           src=""
+                                         />
+                                         Username
+                                       </button>
+                                       <div
+                                         class="dropdown-menu bg-dark"
+                                         aria-labelledby="dropdownMenu2"
+                                       >
+                                         <button class="dropdown-item topdropdwon text-white" type="button">
+                                           Account
+                                         </button>
+                                         <button class="dropdown-item topdropdwon text-white" type="button">
+                                           Profile
+                                         </button>
+                                         <button  class="dropdown-item topdropdwon text-white" type="button">
+                                           Upgrade to Permium
+                                         </button>
+                                         <button class="dropdown-item topdropdwon text-white" type="button">
+                                           Settings
+                                         </button>
+                                         <div class="dropdown-divider"></div>
+                                         <button  class="dropdown-item topdropdwon text-white" type="button">
+                                           Update Spotify now
+                                         </button>
+                                        <button onclick="location.href='profile.html'" class="dropdown-item  topdropdwon text-white" type="button">Log out</button>
+                                       </div>
+                                     </div> <!-- end of dropdown menu  -->
+                                   </div> <!--  -->
+                                   
+                                   <div class="row" id="image-align">
+                                     <div class="col-4 col-sm-4 col-lg-3 col-xl-3" id="coverImg">
+                                       <img src="./images/ab67616d0000b273056e90910cbaf5c5b892aeba.jfif" class="img-fluid"  />
+                                     </div>
+                                     <div
+                                       class="albumTextContainer col-8 col-sm-8 col-lg-9 col-xl-9"
+                                     >
+                                       <p class="display-7 d-none d-sm-none d-md-flex">
+                                         <small style="font-weight: bold;">ALBUM</small>
+                                         <strong  class="align-self-center" style="font-size: 30px;" id="albumName">Bohemian Rhapsody(The Original Soundtrack)</strong>
+                   
+                                         <small style="font-size: 15px">
+                                           <strong id="artiName">Queen</strong>  &#8226; 2018 &#8226; 22 songs, 1 hr 19mins</small>
+                                       </p>
+                                     </div>
+                                   </div>
+                                 </div> <!--  -->
+                               </section>
+                 
+                               <!-- Table section -->
+                               <section id="table-section">
+                                 <div>
+                                   <div class="buttonBox">
+                                     <button class="button play" style="display: inline"></button>
+                                   </div>
+                                   <div id="heart">
+                                     
+                                     <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       width="30"
+                                       height="30"
+                                       fill="currentColor"
+                                       color="white"
+                                       class="bi bi-heart"
+                                       viewBox="0 0 16 16"
+                                     >
+                                       <path
+                                         d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                                       />
+                                     </svg>
+                                   </div>
+                                   <div id="heart">
+                                     
+                                     <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       width="30"
+                                       height="30"
+                                       fill="currentColor"
+                                       color="white"
+                                       class="bi bi-three-dots "
+                                       viewBox="0 0 16 16"
+                                     >
+                                       <path
+                                         d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                       />
+                                     </svg>
+                                   </div>
+                                 </div>
+                   
+                                 <div class="container-fluid" id="table-container">
+                                   <table class="table table-dark table-borderless">
+                                     <thead>
+                                       <tr>
+                                         <th scope="col" style="width: 3%" class="text-muted">#</th>
+                                         <th scope="col" colspan="2" class="text-muted">TITLE</th>
+                                         <th scope="col">
+                                        
+                                           <svg
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             width="34"
+                                             height="26"
+                                             fill="currentColor"
+                                             class="bi-bi bi-stopwatch text-muted"
+                                             viewBox="0 0 16 16"
+                                           >
+                                             <path
+                                               d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"
+                                             />
+                                             <path
+                                               d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"
+                                             />
+                                           </svg>
+                                         </th>
+                                       </tr>
+                                     </thead>
+                                     <tbody id="tracks">
+                                       
+                                       
+                                      
+                                     </tbody>
+                                   </table>
+                                 </div>
+                               </section>
+                             </div>
+                           
+                         </div>
+                       </div> <!-- end of main row -->
+                 
+                     </div> <!-- end of main container  -->
+                 
+
+
+
+
+
+                       
+                        
+
+                        
+                       
+
+        <div class="row footer">
+            <nav class="col-12 navbar fixed-bottom now-playing">
+                <div class="col-12 col-xl-4 title-img">
+                    <img src="./images/ab67616d0000b273056e90910cbaf5c5b892aeba.jfif" width="35" />
+                    <span>Another One Bites The Dust-Remastered 2011</span>
+                    <!-- <h4>Another One Bites The Dust-Remastered 2011</h4> -->
+                    <h5 class="h5-ineed">Queen</h5>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-aspect-ratio"></i>
+                </div>
+
+
+            <div id="play-controls" class="col-12 col-xl-4 play-btn">
+                <svg
+                  id="shuffle"
+                  class="mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="20"
+                  height="17"
+                  viewBox="0 0 172 172"
+                  style="fill: #aa0909"
+                >
+                  <g
+                    fill="none"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
+                    style="mix-blend-mode: normal"
+                  >
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <g fill="#ffffff">
+                      <path
+                        d="M1.34375,52.40625c0,2.28438 1.74687,4.03125 4.03125,4.03125h34.13125c6.9875,0 13.4375,3.09062 17.87188,8.6c0.80625,0.94063 2.01563,1.47813 3.09062,1.47813c0.94063,0 1.74687,-0.26875 2.55313,-0.94062c1.74687,-1.34375 2.01562,-3.89688 0.67188,-5.64375c-5.9125,-7.39062 -14.78125,-11.55625 -24.1875,-11.55625h-34.13125c-2.28438,0 -4.03125,1.74687 -4.03125,4.03125zM147.94688,95.27188c-1.6125,-1.6125 -4.16563,-1.6125 -5.64375,0c-1.6125,1.6125 -1.6125,4.16562 0,5.64375l14.64687,14.64687h-37.89375c-6.9875,0 -13.4375,-3.09063 -17.87187,-8.6c-1.34375,-1.74687 -3.89688,-2.01562 -5.64375,-0.67187c-1.74687,1.34375 -2.01562,3.89688 -0.67187,5.64375c5.9125,7.39063 14.64688,11.55625 24.1875,11.55625h37.75937l-14.64687,14.64687c-1.6125,1.6125 -1.6125,4.16563 0,5.64375c0.80625,0.80625 1.88125,1.20937 2.82187,1.20937c0.94062,0 2.01563,-0.40312 2.82188,-1.20937l21.5,-21.5c1.6125,-1.6125 1.6125,-4.16562 0,-5.64375zM147.94688,28.08438c-1.6125,-1.6125 -4.16563,-1.6125 -5.64375,0c-1.6125,1.6125 -1.6125,4.16563 0,5.64375l14.64687,14.64688h-37.89375c-9.40625,0 -18.275,4.16562 -24.1875,11.55625l-37.625,47.03125c-4.3,5.50937 -10.88437,8.6 -17.87188,8.6h-33.99687c-2.28438,0 -4.03125,1.74688 -4.03125,4.03125c0,2.28437 1.74687,4.03125 4.03125,4.03125h34.53437h0.13438c9.27188,-0.13437 17.87187,-4.3 23.65,-11.55625l37.625,-47.03125c4.3,-5.50938 10.88437,-8.6 17.87187,-8.6h37.75938l-14.64688,14.64688c-1.6125,1.6125 -1.6125,4.16563 0,5.64375c0.80625,0.80625 1.88125,1.20938 2.82188,1.20938c0.94062,0 2.01563,-0.40313 2.82188,-1.20938l21.5,-21.5c1.6125,-1.6125 1.6125,-4.16563 0,-5.64375z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+    
+                <svg
+                  id="prev-button"
+                  class="mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 172 172"
+                  style="fill: #000000"
+                >
+                  <g
+                    fill="none"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
+                    style="mix-blend-mode: normal"
+                  >
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <g fill="#cccccc">
+                      <path
+                        d="M61.92,75.16938v-44.20938h-27.52v110.08h27.52v-44.20937l72.24,47.11187v-115.89844z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+    
+                <svg
+                  id="play-button"
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="35"
+                  height="35"
+                  viewBox="0 0 172 172"
+                  style="fill: #000000"
+                >
+                  <g
+                    fill="none"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
+                    style="mix-blend-mode: normal"
+                  >
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <g fill="#ffffff">
+                      <path
+                        d="M86,6.88c-43.62608,0 -79.12,35.49048 -79.12,79.12c0,43.62952 35.49392,79.12 79.12,79.12c43.62608,0 79.12,-35.49048 79.12,-79.12c0,-43.62952 -35.49392,-79.12 -79.12,-79.12zM62.06448,123.95696l-0.28552,-75.66624l65.50104,37.58544z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+    
+                <svg
+                  id="next-button"
+                  class="ml-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="20"
+                  height="17"
+                  viewBox="0 0 172 172"
+                  style="fill: #000000"
+                >
+                  <g
+                    fill="none"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
+                    style="mix-blend-mode: normal"
+                  >
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <g fill="#cccccc">
+                      <path
+                        d="M110.08,30.96v44.20938l-72.24,-47.12531v115.91187l72.24,-47.12531v44.20937h27.52v-110.08z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+                  
+                <img id="repeat-button" src="./images/icons8-repeat-30 (1).png" width="17" height="17" alt="">
+
+                <div class="position-relative">
+                    <span class="span-1">02:20</span>
+                    <hr class="duration-hr" />
+                    <span class="span-2">03:25</span>
+                </div>
+
+              </div>
+    
+
+                <div class="col-12 col-xl-4 volume-controls">
+                    <div class="vol-btn">
+                        <svg id="vol-btn-1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
+                            viewBox="0 0 172 172" style="fill: #000000">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                <g fill="#cccccc">
+                                    <path
+                                        d="M28.66667,21.5c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v78.83333c0,7.91917 6.41417,14.33333 14.33333,14.33333h50.16667v-14.33333h-43v-78.83333h121.83333c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM107.5,50.16667c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v71.66667c0,7.91917 6.41417,14.33333 14.33333,14.33333h35.83333c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-71.66667c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM107.5,64.5h35.83333v71.66667h-35.83333z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <svg id="vol-btn-2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
+                            viewBox="0 0 172 172" style="fill: #000000">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                <g fill="#cccccc">
+                                    <path
+                                        d="M6.88,10.32v13.76h158.24v-13.76zM6.88,44.72v13.76h99.76v-13.76zM126.9575,48.16c-0.33594,0.02688 -0.645,0.08063 -0.9675,0.215c-1.29,0.5375 -2.15,1.84094 -2.15,3.225v68.8c0,1.38406 0.86,2.70094 2.15,3.225c0.43,0.17469 0.84656,0.215 1.29,0.215c0.90031,0 1.81406,-0.30906 2.4725,-0.9675l34.4,-34.4c1.34375,-1.34375 1.34375,-3.60125 0,-4.945l-34.4,-34.4c-0.73906,-0.73906 -1.78719,-1.06156 -2.795,-0.9675zM6.88,79.12v13.76h99.76v-13.76zM6.88,113.52v13.76h99.76v-13.76zM6.88,147.92v13.76h158.24v-13.76z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <svg id="vol-btn-3" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15"
+                            viewBox="0 0 172 172" style="fill: #000000">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                <g fill="#cccccc">
+                                    <path
+                                        d="M91.53625,6.88c-2.29781,0 -4.48812,0.95406 -6.03344,2.63375l-42.28781,45.52625h-26.015c-5.65719,0 -10.32,4.66281 -10.32,10.32v41.28c0,5.65719 4.66281,10.32 10.32,10.32h26.015l42.28781,45.52625c1.54531,1.67969 3.73562,2.63375 6.03344,2.63375c4.50156,0 8.22375,-3.72219 8.22375,-8.22375v-141.7925c0,-4.50156 -3.72219,-8.22375 -8.22375,-8.22375zM91.53625,13.76c0.77938,0 1.34375,0.56438 1.34375,1.34375v141.7925c0,0.77938 -0.56437,1.34375 -1.34375,1.34375c-0.38969,0 -0.73906,-0.16125 -0.99437,-0.43l-42.38188,-45.63375v-52.3525l42.36844,-45.63375c0.26875,-0.28219 0.61813,-0.43 1.00781,-0.43zM136.55188,35.85125l-3.85656,5.68406c15.25156,8.96281 25.54469,25.51781 25.54469,44.46469c0,18.94688 -10.29312,35.50188 -25.54469,44.46469l3.85656,5.68406c17.07906,-10.2125 28.56812,-28.83687 28.56812,-50.14875c0,-21.31187 -11.48906,-39.93625 -28.56812,-50.14875zM124.95531,52.90344l-3.89688,5.72438c9.82281,5.20031 16.54156,15.50687 16.54156,27.37219c0,11.86531 -6.71875,22.17188 -16.54156,27.37219l3.89688,5.72438c11.63687,-6.47688 19.52469,-18.86625 19.52469,-33.09656c0,-14.23031 -7.88781,-26.61969 -19.52469,-33.09656zM17.2,61.92h24.08v48.16h-24.08c-1.92156,0 -3.44,-1.51844 -3.44,-3.44v-41.28c0,-1.92156 1.51844,-3.44 3.44,-3.44zM113.25125,70.13031l-4.01781,5.92594c4.43438,1.15563 7.72656,5.14656 7.72656,9.94375c0,4.79719 -3.29219,8.78813 -7.72656,9.94375l4.01781,5.92594c6.20813,-2.60687 10.58875,-8.73437 10.58875,-15.86969c0,-7.13531 -4.38062,-13.27625 -10.58875,-15.86969z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="expand">
+                        <hr class="volume-hr" />
+                        <img id="expand" src="./images/icons8-enlarge-50.png" width="18" alt="">
+                    </div>
+            </nav>
+        </div>
+    </div>
+
+       <!--  <audio id="audio1" src='WizKid - Blessed (Audio) ft. Damian Marley.mp3'></audio> -->
+
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfG▶️0yAns"
+            crossorigin="anonymous"></script>
+ -->
+        
+
+  
+</body>
+
+</html>
