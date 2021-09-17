@@ -56,8 +56,12 @@ function queryArtist(){
   
   window.onload = () => {
     searchDeezers()
-    queryMusic()
+    // queryMusic()
     
+
+
+
+
   
   
   
