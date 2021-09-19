@@ -9,10 +9,10 @@
     const tracksTable = document.getElementById("tracks")
     
 
-    /* const params = new URLSearchParams(window.location.search).get('albumId')
-    console.log(params) */
+    const params = new URLSearchParams(window.location.search).get('albumId')
+    console.log(params) 
 
-    fetch("https://striveschool-api.herokuapp.com/api/deezer/album/75621062" , 
+    fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + params, 
     {
         method: "GET",
         

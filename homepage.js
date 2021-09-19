@@ -1,8 +1,12 @@
 // const ref = document.querySelector('#goodmorning, #recently')
 
 
+// const tracksTable = document.getElementById("tracks")
+// const goToArtist = new URLSearchParams(window.location.search).get("albumId")
+// console.log(`Album`, goToArtist)
+
 const goodMorning = () => {
-    queryArtist(goodmorning)
+    queryArtist()
     showAlbum()
     .then((response) => response.json())
     .then((body) => {
@@ -41,6 +45,7 @@ const goodMorning = () => {
                 
                 `;
         row.appendChild(col);
+
       }
       // At the end of this loop with should have x length of cards with different album covers and different title
     })
@@ -214,7 +219,7 @@ function queryArtist(){
       // Erasing the pervious table and put a new one when the function is called
       for (let i = 0; i < body.data.length; i++) {
         let object = body.data[i];
-        console.log(object);
+        // console.log(object);
       // Looping through the data array to get our specific components
         const col = document.createElement("div");
         col.className = "col-3";
@@ -225,7 +230,7 @@ function queryArtist(){
                                     class="card-img-top" />
                                 <div class="card-body mt-2">
                                     <h6 class="card-title text-white">${object.title}</h6>
-                                    <h5 class="card-text"></h5>
+                                    <a href="./albumpage.html?albumId=${object.album.id}" class="card-text text-light">${object.artist.name}</a>
                                     <button id='btn-with-style1' type="button" class="btn btn-success">▶️</button>
                                 </div>
                             </div>
@@ -270,7 +275,7 @@ function queryArtist(){
       // At the end of this loop with should have x length of cards with different album covers and different title
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err)
     });
   
   }
@@ -304,8 +309,7 @@ function queryArtist(){
     recentlyDownloaded()
     favouriteMusice()
     searchDeezers()
-    const albumID = new URLSearchParams(window.location.search).get("id")
-   console.log(albumID);
+
  
 
     
